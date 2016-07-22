@@ -9,8 +9,8 @@ class Person
   end
 
   def name_array
-    name = name.select! {|n| n != nil }
-    name_array[1] = middle_name[0] + '.'
+    name.select! {|n| n != nil }
+    name
   end
 
   def full_name
