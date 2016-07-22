@@ -1,34 +1,31 @@
 
 class Person
-  attr_reader :first_name, :middle_name, :last_name
+  attr_reader :first_name, :middle_name, :last_name, :name
   def initialize(first_name:, middle_name: nil, last_name:)
     @first_name = first_name
     @middle_name = middle_name
     @last_name = last_name
+    @name = [first_name, middle_name, last_name]
+  end
+
+  def name_array
+    name = name.select! {|n| n != nil }
+    name_array[1] = middle_name[0] + '.'
   end
 
   def full_name
-    if middle_name == nil
-      first_name + ' ' + last_name
-    else
-      first_name + ' ' + middle_name + ' ' + last_name
-    end
+    name_array.join(' ')
   end
 
   def full_name_with_middle_initial
-    if middle_name == nil
-      first_name + ' ' + last_name
-    else
-      first_name + ' ' + middle_name[0] + '.' + ' ' + last_name
+    if name_array.size > 2
+      name_array[1] = middle_name[0] + '.'
     end
+    full_name
   end
 
   def initials
-    if middle_name == nil
-      first_name[0] + '. ' + last_name[0] + '.'
-    else
-      first_name[0] + '. ' + middle_name[0] + '. ' + last_name[0] + '.'
-    end
+    name_array.map { |name| name[0] + '.'}.join(' ')
   end
 end
 
